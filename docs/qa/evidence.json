@@ -1,0 +1,62 @@
+{
+  "contract": "../design-contract.md \u2014 five-page static gift using existing names and wedding photographs, with persistent user-started background music.",
+  "targetViewports": [
+    "1440x900",
+    "390x844"
+  ],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "Home and songs pages score 100 in Lighthouse accessibility after correcting heading order and text contrast. Native dialogs support Escape. Keyboard focus outline inspected; photo viewer opens via Enter and arrow navigation changes photos. Reduced-motion media rules disable transitions and the heart animation; its JS also checks the preference."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "Inspected desktop home and mobile home/songs renders. All five pages tested at 390px without horizontal overflow; background player also fits within mobile width."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "pass",
+      "evidence": "Static content renders without a JS loading dependency; photos reserve space. Viewer reports loading; video container reserves dimensions and includes a loading message. Page navigation marks main aria-busy."
+    },
+    "empty": {
+      "status": "not-applicable",
+      "reason": "Fixed personal content with three supplied photos and four curated songs; no user-created or fetched collection."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "Photo viewer missing-file path exercised, then recovered by selecting the next photo. YouTube direct links remain available independently of the iframe. External playback and browser autoplay policy remain outside site control."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "Every local link and asset on all five pages returned HTTP 200. The full site stays readable without a video iframe; music creates one only after a play action. External fonts have local fallbacks."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "Letter postscript opens and closes with aria-expanded. All eight notes cycle. Photo navigation works. Do You Know is the fourth song. Browser checks confirm the exact background iframe survives page changes and Back, alternate songs stop it, and closing players removes their iframes."
+    },
+    "permission": {
+      "status": "not-applicable",
+      "reason": "No accounts or OS permission prompts. Music starts with an explicit visitor action; browser/YouTube may require another play tap."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "1440x900",
+      "artifact": "home-desktop.jpg",
+      "observation": "Ivory editorial layout, clear primary action, full wedding portrait in an arch, personal details and optional floating song prompt."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "home-mobile.jpg",
+      "observation": "Navigation and hero reflow into a single column; text and controls fit the viewport."
+    },
+    {
+      "viewport": "390x844",
+      "artifact": "songs-mobile.jpg",
+      "observation": "Vinyl illustration, title and play button fit the narrow layout; four-song count is visible."
+    }
+  ],
+  "limitations": [
+    "Actual audio output and autoplay cannot be guaranteed across browser policies, regional restrictions, and YouTube availability. Playback controls, video URLs, persistence and cleanup were tested.",
+    "Full reloads/new tabs require starting the background song again."
+  ]
+}
